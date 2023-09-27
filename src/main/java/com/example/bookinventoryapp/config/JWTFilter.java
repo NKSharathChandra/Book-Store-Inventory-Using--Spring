@@ -22,7 +22,7 @@ public class JWTFilter extends GenericFilterBean {
         final String authorization = request.getHeader(AUTHORIZATION);
         if(authorization==null || !authorization.startsWith(BEARER)){
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            response.getWriter().println("Auth Header is Missing");
+            response.getWriter().println("Token missing in Authorisation Header");
         }
         else{
             String token = authorization.substring(7);
@@ -36,7 +36,7 @@ public class JWTFilter extends GenericFilterBean {
                 Date now = new Date();
                 if (expiration != null && expiration.before(now)) {
                     response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-                    response.getWriter().println("Token has expired, please login again");
+                    response.getWriter().println("Token has expired due to timeout, please login again to generate new token");
                 } else {
                     request.setAttribute("claims", claims);
                     filterChain.doFilter(request, response);
@@ -44,7 +44,7 @@ public class JWTFilter extends GenericFilterBean {
             }
             catch (Exception e){
                 response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-                response.getWriter().println("Token Not Valid");
+                response.getWriter().println("Token Not Valid,please check");
             }
         }
     }

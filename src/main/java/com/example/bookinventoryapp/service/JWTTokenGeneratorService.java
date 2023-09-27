@@ -15,7 +15,7 @@ public class JWTTokenGeneratorService {
     private String secretKey;
 
     public Map<String,String> generateToken(Customer customer){
-        long expirationMillis = System.currentTimeMillis() + 30000;
+        long expirationMillis = System.currentTimeMillis() + 600000;
         Date expirationDate = new Date(expirationMillis);
         String token = Jwts.builder()
                 .setSubject(customer.getCustomerEmail())

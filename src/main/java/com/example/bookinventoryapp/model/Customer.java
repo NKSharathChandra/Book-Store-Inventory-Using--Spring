@@ -1,7 +1,8 @@
 package com.example.bookinventoryapp.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 public class Customer {
@@ -11,14 +12,22 @@ public class Customer {
     private String password;
     private long contactNo;
 
+    @OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    private Account account;
+
+    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    private List<Book> bookList;
+
     public Customer() {
     }
 
-    public Customer(String customerEmail, String customerName, String password, long contactNo) {
+    public Customer(String customerEmail, String customerName, String password, long contactNo, Account account, List<Book> bookList) {
         this.customerEmail = customerEmail;
         this.customerName = customerName;
         this.password = password;
         this.contactNo = contactNo;
+        this.account = account;
+        this.bookList = bookList;
     }
 
     public String getCustomerEmail() {
@@ -53,6 +62,22 @@ public class Customer {
         this.contactNo = contactNo;
     }
 
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+
+    public List<Book> getBookList() {
+        return bookList;
+    }
+
+    public void setBookList(List<Book> bookList) {
+        this.bookList = bookList;
+    }
+
     @Override
     public String toString() {
         return "Customer{" +
@@ -60,6 +85,8 @@ public class Customer {
                 ", customerName='" + customerName + '\'' +
                 ", password='" + password + '\'' +
                 ", contactNo=" + contactNo +
+                ", account=" + account +
+                ", bookList=" + bookList +
                 '}';
     }
 }
