@@ -21,7 +21,7 @@ public class Customer {
     public Customer() {
     }
 
-    public Customer(String customerEmail, String customerName, String password, long contactNo, Account account, List<Book> bookList) {
+    public Customer(String customerEmail, String customerName, String password, long contactNo, Account account) {
         this.customerEmail = customerEmail;
         this.customerName = customerName;
         this.password = password;

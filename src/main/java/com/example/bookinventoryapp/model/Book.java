@@ -1,7 +1,6 @@
 package com.example.bookinventoryapp.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Book {
@@ -13,6 +12,10 @@ public class Book {
     private double price;
     private String location;
 
+//    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+//    @JoinColumn(name = "order_id")
+//    private Customer customer;
+
     public Book() {
     }
 
@@ -23,6 +26,7 @@ public class Book {
         this.quantity = quantity;
         this.price = price;
         this.location = location;
+//        this.customer = customer;
     }
 
     public long getISBN() {
@@ -73,6 +77,14 @@ public class Book {
         this.price = price;
     }
 
+//    public Customer getCustomer() {
+//        return customer;
+//    }
+//
+//    public void setCustomer(Customer customer) {
+//        this.customer = customer;
+//    }
+
     @Override
     public String toString() {
         return "Book{" +
@@ -82,6 +94,7 @@ public class Book {
                 ", quantity=" + quantity +
                 ", price=" + price +
                 ", location='" + location + '\'' +
+//                ", customer=" + customer +
                 '}';
     }
 }
